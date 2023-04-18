@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {}
+    "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {}
   },
   "projects": {
-    "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {
+    "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
+        "projectUniqueName": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
         "projectName": "OrderService",
-        "projectPath": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
+        "projectPath": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
         "packagesPath": "C:\\Users\\Rapidtech\\.nuget\\packages\\",
-        "outputPath": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\obj\\",
+        "outputPath": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rapidtech\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,28 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
