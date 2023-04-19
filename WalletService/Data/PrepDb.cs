@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WalletService.Models;
+﻿using WalletService.Models;
 
-namespace WalletService.Data
+namespace WalletServices.Data
 {
     public class PrepDb
     {
+        private readonly WalletRepo _repo;
         public static void PrepPopulation(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateAsyncScope())
+            using (var serviceScope = app.ApplicationServices.CreateAsyncScope()) 
             {
                 SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
             }
@@ -18,27 +15,27 @@ namespace WalletService.Data
 
         private static void SeedData(AppDbContext context)
         {
-            if (!context.Wallets.Any())
+            if(!context.Wallets.Any()) 
             {
-                Console.WriteLine("--> Seeding Data.. <--");
+                Console.WriteLine("--> Seeding data <--");
                 context.Wallets.AddRange(
                     new Wallet()
                     {
-                        UserName = "Lucy",
+                        UserName = "user1",
                         FullName = "Lucy Mangemba",
-                        Cash = 100000
+                        Cash = 1000
                     },
                     new Wallet()
                     {
-                        UserName = "Lois",
+                        UserName = "user2",
                         FullName = "Try Lois",
-                        Cash = 200000
+                        Cash = 2000
                     },
                     new Wallet()
                     {
-                        UserName = "Lidya",
+                        UserName = "user3",
                         FullName = "Lidya Datu Langi",
-                        Cash = 50000
+                        Cash = 3000
                     });
                 context.SaveChanges();
             }

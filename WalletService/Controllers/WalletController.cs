@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using WalletService.Data;
-using WalletService.Dtos;
 using WalletService.Models;
+using WalletServices.Data;
+using WalletServices.Dtos;
 
 namespace WalletService.Controllers
 {
@@ -16,80 +16,84 @@ namespace WalletService.Controllers
     {
         private readonly IWalletRepo _repo;
         private readonly IMapper _mapper;
-
-        public WalletController(IWalletRepo repo, IMapper mapper)
+        public WalletController(IWalletRepo repo, IMapper mapper) 
         {
             _repo = repo;
             _mapper = mapper;
-
         }
-
         [HttpGet]
-        public ActionResult<IEnumerable<ReadWalletDto>> GetAllProduct()
+        public async Task<IActionResult> GetWallets() 
         {
-            var walletItem = _repo.GetAllWallet();
-            var walletReadDtoList = _mapper.Map<IEnumerable<ReadWalletDto>>(walletItem);
-            return Ok(walletReadDtoList);
+            Console.WriteLine("--> Getting Wallet <--");
+            var walletItem = await _repo.GetAllWallet();
+            return Ok(walletItem);
         }
-
-        [HttpGet("{name}", Name = "GetByWalletName")]
-        public async Task<ActionResult> GetByName(string name)
+        [HttpPost]
+        public async Task<IActionResult> CreateWallet(CreateWalletDto createWalletDto)
         {
-            var wallet = await _repo.GetByName(name);
-            var readWallet = _mapper.Map<ReadWalletDto>(wallet);
+            var walletModel = _mapper.Map<Wallet>(createWalletDto);
+            var usernameWallet = _repo.GenerateId();
+            walletModel.UserName = usernameWallet;
+            await _repo.Create(walletModel);
+            _repo.SaveChanges();
+
+            var readWallet = _mapper.Map<ReadWalletDto>(walletModel);
             return Ok(readWallet);
-        }
+            // var walletModel = _mapper.Map<Wallet>(createWalletDto);
+            // var usernameWallet = _repo.GenerateId();
+            // walletModel.Username = usernameWallet;
+            // walletModel.Cash = 0;
+            // await _repo.Create(walletModel);
+            // _repo.SaveChanges();
 
-        [HttpPut ("Topup")]
-        public async Task<ActionResult> TopupWallet(TopupWalletDto topupWalletDto)
+            // var readWallet = _mapper.Map<ReadWalletDto>(walletModel);
+            // return Ok(readWallet);
+        }
+        [HttpPut("{username}")]
+        public async Task<IActionResult> EditWallet(string username ,EditWalletDto editWalletDto)
         {
             try
             {
-                var wallet = _mapper.Map<Wallet>(topupWalletDto);
-                wallet.UserName = topupWalletDto.UserName;
-                await _repo.TopupWallet(wallet);
+                var walletModel = _mapper.Map<Wallet>(editWalletDto);
+                walletModel.UserName = username;
+                await _repo.Edit(username, walletModel);
                 _repo.SaveChanges();
-                var returnWallet = await _repo.GetByName(topupWalletDto.UserName);
-                var readProductDto = _mapper.Map<ReadWalletDto>(returnWallet);
-                return Ok(readProductDto);
+
+                var readWalletDto = _mapper.Map<ReadWalletDto>(walletModel);
+                return Ok(readWalletDto);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPut("Pay")]
-        public async Task<ActionResult> OrderWallet(OrderWalletDto orderWalletDto)
+        [HttpPut("topUp")]
+        public async Task<IActionResult> TopUpWallet(string username, int cash)
         {
-             try
+            try
             {
-                var wallet = _mapper.Map<Wallet>(orderWalletDto);
-                wallet.UserName = orderWalletDto.UserName;
-                await _repo.OrderWallet(wallet);
+                await _repo.Topup(cash, username);
                 _repo.SaveChanges();
-                var returnWallet = await _repo.GetByName(orderWalletDto.UserName);
-                var readProductDto = _mapper.Map<ReadWalletDto>(returnWallet);
-                return Ok(readProductDto);
+                return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            // try
-            // {
-            //     var wallet = _mapper.Map<Wallet>(orderWalletDto);
-            //     wallet.UserName = name;
-            //     await _repo.OrderWallet(name, wallet);
-            //     _repo.SaveChanges();
-            //     var returnWallet = await _repo.GetByName(name);
-            //     var readProductDto = _mapper.Map<ReadWalletDto>(returnWallet);
-            //     return Ok(readProductDto);
-            // }
-            // catch (Exception ex)
-            // {
-            //     return BadRequest(ex.Message);
-            // }
+        }
+        [HttpPut("cashOut")]
+        public async Task<IActionResult> CashOutWallet(string username, int cash)
+        {
+            try
+            {
+                await _repo.CashOut(cash, username);
+                _repo.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

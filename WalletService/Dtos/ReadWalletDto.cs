@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace WalletService.Dtos
+namespace WalletServices.Dtos
 {
     public class ReadWalletDto
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
+        [Key]
+        public string Username { get; set; }
+        public string Fullname { get; set; }
         public int Cash { get; set; }
     }
 }

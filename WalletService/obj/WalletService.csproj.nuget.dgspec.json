@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj": {}
+    "C:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj": {}
   },
   "projects": {
-    "c:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj": {
+    "C:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
+        "projectUniqueName": "C:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
         "projectName": "WalletService",
-        "projectPath": "c:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
+        "projectPath": "C:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
         "packagesPath": "C:\\Users\\Rapidtech\\.nuget\\packages\\",
-        "outputPath": "c:\\Bootcamp\\TugasMicroservices\\WalletService\\obj\\",
+        "outputPath": "C:\\Bootcamp\\TugasMicroservices\\WalletService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rapidtech\\AppData\\Roaming\\NuGet\\NuGet.Config",

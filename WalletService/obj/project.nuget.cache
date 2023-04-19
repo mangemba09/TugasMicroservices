@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dw9cO3zfi/fA97GXo1QJiR+E8Y4eD48EVh4SqQJgnZtZB/RuTWuqr1av6TwHCaNIs3N52xeIOykrzKPlPDMqDA==",
+  "dgSpecHash": "TeQ5Ey7ghR/CRilvFny2KcBT7E1D8/F1/YcKv+NfM7ZXL0lgTrpvrc/eSPjnVEV4v/yVIbzlLBmaQtScs9oYMA==",
   "success": true,
-  "projectFilePath": "c:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
+  "projectFilePath": "C:\\Bootcamp\\TugasMicroservices\\WalletService\\WalletService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rapidtech\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Rapidtech\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

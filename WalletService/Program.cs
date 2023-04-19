@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WalletService.Data;
+using WalletServices.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

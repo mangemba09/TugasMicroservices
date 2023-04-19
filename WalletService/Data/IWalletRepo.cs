@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+
 using WalletService.Models;
 
-namespace WalletService.Data
+namespace WalletServices.Data
 {
     public interface IWalletRepo
     {
-        IEnumerable<Wallet> GetAllWallet();
-        // Task<Wallet> GetById(int id);
-        Task<Wallet> GetByName(string name);
-        Task TopupWallet(Wallet wallet);
-        Task OrderWallet(Wallet wallet);
+        Task<IEnumerable<Wallet>> GetAllWallet();
+        Task<Wallet> GetbyUsername(string name);
+        Task Create(Wallet wallet);
+        Task Edit(string username, Wallet wallet);
+        Task Topup(int cash, string username);
+        Task CashOut(int cash, string username);
+        string GenerateId();
         bool SaveChanges();
     }
 }

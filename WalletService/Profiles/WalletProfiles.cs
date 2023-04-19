@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using WalletService.Dtos;
 using WalletService.Models;
+using WalletServices.Dtos;
 
 namespace WalletService.Profiles
 {
@@ -13,8 +13,8 @@ namespace WalletService.Profiles
         public WalletProfiles()
         {
             CreateMap<Wallet, ReadWalletDto>();
-            CreateMap<TopupWalletDto, Wallet>();
-            CreateMap<OrderWalletDto, Wallet>();
+            CreateMap<CreateWalletDto, Wallet>();
+            CreateMap<EditWalletDto, Wallet>();
             // CreateMap<CreateProductDto, Product>();
         }
     }
