@@ -27,21 +27,21 @@ namespace ProductService.Data
                         Name = "Baju",
                         Stock = 20,
                         Description = "T-shirt",
-                        Price = 30
+                        Price = 30000
                     },
                     new Product()
                     {
                         Name = "Teh kotak",
                         Stock = 50,
                         Description = "Teh manis instan",
-                        Price = 5
+                        Price = 5000
                     },
                     new Product()
                     {
                         Name = "Asus",
                         Stock = 84,
                         Description = "Laptop",
-                        Price = 20
+                        Price = 12000000
                     });
                 context.SaveChanges();
             }

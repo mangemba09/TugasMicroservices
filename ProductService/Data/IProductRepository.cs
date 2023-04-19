@@ -8,12 +8,12 @@ namespace ProductService.Data
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetAllProduct();
+         Task<IEnumerable<Product>> GetAllProduct();
         Task<Product> GetById(int id);
         Task<Product> GetByName(string name);
-        void CreateProduct(Product product);
+        Task Create(Product product);
         Task Update(int id, Product product);
-        Task DeleteProduct(int id);
+        Task Delete(int id);
         bool SaveChanges();
 
     }

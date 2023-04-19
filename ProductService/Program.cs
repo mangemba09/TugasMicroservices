@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProductService.Data;
+using ProductServices.SyncDataServices.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // service interface product repo
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// service data client
+builder.Services.AddHttpClient<IOrderDataClient, OrderDataClient>();
 
 //see db service
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));

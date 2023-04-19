@@ -14,36 +14,26 @@ namespace ProductService.Data
         {
             _context = context;
         }
-        public void CreateProduct(Product product)
+        public Task Create(Product product)
         {
             if (product == null)
             {
                 throw new ArgumentNullException(nameof(product));
             }
             _context.Products.Add(product);
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteProduct(int id)
+        public async Task Delete(int id)
         {
-
-            try
-            {
-                var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
-                if (product == null)
-                {
-                    throw new Exception("product not found");
-                }
-                _context.Products.Remove(product); // Hapus data dari list
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error updating product: {ex.Message}");
-            }
+            var productDelete = await GetById(id);
+            _context.Products.Remove(productDelete);
         }
 
-        public IEnumerable<Product> GetAllProduct()
+        public async Task<IEnumerable<Product>> GetAllProduct()
         {
             return _context.Products.ToList();
+            //throw new NotImplementedException();
         }
 
         public async Task<Product> GetById(int id)
@@ -68,7 +58,7 @@ namespace ProductService.Data
             return product;
         }
 
-        public async Task Update(int id, Product product)
+        public async Task Update(int id,Product product)
         {
             try
             {
@@ -78,13 +68,13 @@ namespace ProductService.Data
                 existingProduct.Price = product.Price;
                 existingProduct.Stock = product.Stock;
             }
-            catch (Exception ex)
+            catch(Exception ex) 
             {
                 throw new Exception($"Error updating product: {ex.Message}");
             }
             //throw new NotImplementedException();
         }
-        public bool SaveChanges()
+        public bool SaveChanges() 
         {
             return (_context.SaveChanges() >= 0);
         }

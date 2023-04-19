@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SAJiYET3jNSttW6NokpJtiTAQwsUWSIrivfOaTSugRDfm9zJl6V+P8wULhe8pwIPmJnNW7XejijCisyOXwhQSQ==",
+  "dgSpecHash": "fRchITPXUuPP6HZakR8ID64B0/CWSeG/3JwYQ0TBH+wmzCLQ+2QBN8wWPIhZEjO6gfNmOTHP8XF1WvjxOYI8fg==",
   "success": true,
-  "projectFilePath": "c:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
+  "projectFilePath": "C:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rapidtech\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Rapidtech\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

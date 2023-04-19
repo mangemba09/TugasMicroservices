@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj": {}
+    "C:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj": {}
   },
   "projects": {
-    "c:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj": {
+    "C:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
+        "projectUniqueName": "C:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
         "projectName": "ProductService",
-        "projectPath": "c:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
+        "projectPath": "C:\\Bootcamp\\TugasMicroservices\\ProductService\\ProductService.csproj",
         "packagesPath": "C:\\Users\\Rapidtech\\.nuget\\packages\\",
-        "outputPath": "c:\\Bootcamp\\TugasMicroservices\\ProductService\\obj\\",
+        "outputPath": "C:\\Bootcamp\\TugasMicroservices\\ProductService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rapidtech\\AppData\\Roaming\\NuGet\\NuGet.Config",
