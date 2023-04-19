@@ -23,19 +23,19 @@ namespace WalletServices.Data
                     {
                         Username = "user1",
                         Fullname = "Lucy Mangemba",
-                        Cash = 1000
+                        Cash = 100000
                     },
                     new Wallet()
                     {
                         Username = "user2",
                         Fullname = "Try Lois",
-                        Cash = 2000
+                        Cash = 200000
                     },
                     new Wallet()
                     {
                         Username = "user3",
                         Fullname = "Lidya Datu Langi",
-                        Cash = 3000
+                        Cash = 300000
                     });
                 context.SaveChanges();
             }

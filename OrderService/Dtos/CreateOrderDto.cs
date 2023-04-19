@@ -10,6 +10,5 @@ namespace OrderServices.Dtos
         public int ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
-
     }
 }

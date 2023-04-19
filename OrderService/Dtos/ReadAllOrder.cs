@@ -8,5 +8,6 @@ namespace OrderServices.Dtos
         public DateTime OrderDate { get; set; }
         public string Username { get; set; }
         public int ProductId { get; set; }
+        public int Price { get; set; } 
     }
 }

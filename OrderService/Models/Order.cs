@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrderServices.Models
 {
     public class Order
     {
-        public int OrderId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int Quantity { get; set; }   
+        [Key]
+        public int OrderId { get; set; } 
+        public int Quantity { get; set; } 
+        public int Price { get; set; } 
+        public DateTime OrderDate { get; set; }  
 
         [ForeignKey("Wallet")]
         public string Username { get; set; }

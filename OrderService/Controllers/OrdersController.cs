@@ -11,60 +11,38 @@ namespace OrderServices.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
+        private readonly IOrderRepo _orderRepo;
         private readonly IMapper _mapper;
-        private readonly IOrderRepo _repo;
 
-        public OrdersController(IMapper mapper, IOrderRepo repo)
+        public OrdersController(IOrderRepo orderRepo,IMapper mapper)
         {
+            _orderRepo = orderRepo;
             _mapper = mapper;
-            _repo = repo;
         }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReadAllOrder>>> GetOrders()
+        public async Task <ActionResult<IEnumerable<ReadOrderDto>>> GetOrderAll()
         {
-            var order = await _repo.GetAllOrder();
-            var readOrder = _mapper.Map<IEnumerable<ReadAllOrder>>(order);
-            return Ok(readOrder);
+            var orders = await _orderRepo.GetOrderAll();
+            var listOrders = _mapper.Map<IEnumerable<ReadOrderDto>>(orders);
+            return Ok(listOrders);
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateOrder(CreateOrderDto createOrderDto)
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var resultCheckProduct = await _repo.CheckProduct(createOrderDto.ProductId);
-            if (!resultCheckProduct)
-            {
-                return BadRequest("Product not found");
-            }
+            var order = await _orderRepo.GetOrderById(id);
+            var readOrderDto = _mapper.Map<ReadOrderDto>(order);
+            return Ok(readOrderDto);
+        }
 
-            var resultCheckWallet = await _repo.CheckWallet(createOrderDto.Username);
-
-            if (!resultCheckWallet)
-            {
-                return BadRequest("Wallet not found");
-            }
-
-            var resultCheckStock = await _repo.CheckProductStock(createOrderDto.ProductId, createOrderDto.Quantity);
-
-            if (!resultCheckStock)
-            {
-                return BadRequest("No stock products");
-            }
-
-            var resultCheckCash = await _repo.CheckWalletCash(createOrderDto.Username, createOrderDto.ProductId, createOrderDto.Quantity);
-            if (!resultCheckCash)
-            {
-                return BadRequest("the balance is not sufficient");
-            }
-
-            var modelOrder = _mapper.Map<Order>(createOrderDto);
-            modelOrder.OrderDate = DateTime.Now;
-            await _repo.Create(modelOrder);
-            _repo.SaveChanges();
-
-            var readOrder = _mapper.Map<ReadOrderDto>(modelOrder);
-            readOrder.PayAmount = await _repo.PayAmount(modelOrder.ProductId, modelOrder.Quantity);
-            // cash out
-            await _repo.CashOut(modelOrder.Username, modelOrder.Quantity);
-            return Ok(readOrder);
+        [HttpPost]
+        public async Task<ActionResult<Order>> CreateOrder(CreateOrderDto createOrderDto)
+        {
+            var order = _mapper.Map<Order>(createOrderDto);
+            await _orderRepo.CreateOrder(order);
+            _orderRepo.SaveChanges();
+            return CreatedAtAction(nameof(GetById), new { id = order.OrderId }, order);
         }
     }
 }

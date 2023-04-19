@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderServices.Models;
 
 namespace OrderServices.Data
@@ -6,87 +7,56 @@ namespace OrderServices.Data
     public class OrderRepo : IOrderRepo
     {
         private readonly AppDbContext _context;
-        public OrderRepo(AppDbContext context)
+
+    public OrderRepo(AppDbContext context)
+    {
+        _context = context;
+    }
+        public async Task<Order> CreateOrder(Order order)
         {
-            _context = context;
+            var product = await _context.Products.FindAsync(order.ProductId);
+            var wallet = await _context.Wallets.FindAsync(order.Username);
+
+        // cek ketersediaan produk
+        if (product == null)
+        {
+            throw new Exception("Product not found");
+        }
+        // cek ketersediaan stock
+        if (product.Stock < order.Quantity)
+        {
+            throw new Exception("Product is out of stock");
+        }
+        // hitung nilai price
+        var price = product.Price * order.Quantity;
+        order.Price = price;
+
+        // cek cash wallet mencukupi
+        if (wallet.Cash < order.Price)
+        {
+            throw new Exception("Not enough cash");
         }
 
-        public async Task CashOut(string username,int payAmount)
-        {
-            var wallet = await _context.Wallets.FindAsync(username);
+        // memesan produk
+        product.Stock -= order.Quantity;
+        wallet.Cash -= order.Price;
+        order.OrderDate = DateTime.UtcNow;
 
-            if (wallet != null)
-            {
-                wallet.Cash -= payAmount;
-                await _context.SaveChangesAsync();
-            }
+        await _context.Orders.AddAsync(order);
+        await _context.SaveChangesAsync();
+
+        return order;
         }
 
-        public async Task<bool> CheckProduct(int productId)
+        public async Task<IEnumerable<Order>> GetOrderAll()
         {
-            var product = await _context.Products.FindAsync(productId);
-            return product != null;
+            return await _context.Orders.Include(o => o.Product).Include(o => o.Wallet).ToListAsync();
         }
 
-        public async Task<bool> CheckProductStock(int productId, int quantity)
+        public async Task<Order> GetOrderById(int orderId)
         {
-            var product = await _context.Products.FindAsync(productId);
-
-            if (product == null)
-            {
-                return false;
-            }
-
-            return product.Stock >= quantity;
+            return await _context.Orders.Include(o => o.Product).Include(o => o.Wallet).FirstOrDefaultAsync(o => o.OrderId == orderId);
         }
-
-        public async Task<bool> CheckWallet(string username)
-        {
-            var wallet = await _context.Wallets.FindAsync(username);
-            return wallet != null;
-        }
-
-        public async Task<bool> CheckWalletCash(string username, int productId, int quantity)
-        {
-            var walletCash = await _context.Wallets.FindAsync(username);
-            if (walletCash == null)
-            {
-                return false;
-            }
-
-            var product = await _context.Products.FindAsync(productId);
-            if (product == null)
-            {
-                return false;
-            }
-
-            var payAmount = product.Price * quantity;
-
-            return walletCash.Cash >= payAmount;
-        }
-
-        public Task Create(Order order)
-        {
-            if (order == null)
-            {
-                throw new ArgumentNullException(nameof(order));
-            }
-            _context.Orders.Add(order);
-            return Task.CompletedTask;
-        }
-
-        public async Task<IEnumerable<Order>> GetAllOrder()
-        {
-            return _context.Orders.ToList();
-        }
-
-        public async Task<int> PayAmount(int productId, int quantity)
-        {
-            var product = await _context.Products.FindAsync(productId);
-            var payAmount = product.Price * quantity;
-            return payAmount;
-        }
-
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
