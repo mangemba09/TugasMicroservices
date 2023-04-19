@@ -11,7 +11,7 @@ using WalletServices.Dtos;
 namespace WalletService.Controllers
 {
     [ApiController]
-    [Route("api/w/[controller]")]
+    [Route("api/[controller]")]
     public class WalletController : ControllerBase
     {
         private readonly IWalletRepo _repo;
@@ -33,7 +33,7 @@ namespace WalletService.Controllers
         {
             var walletModel = _mapper.Map<Wallet>(createWalletDto);
             var usernameWallet = _repo.GenerateId();
-            walletModel.UserName = usernameWallet;
+            walletModel.Username = usernameWallet;
             await _repo.Create(walletModel);
             _repo.SaveChanges();
 
@@ -55,7 +55,7 @@ namespace WalletService.Controllers
             try
             {
                 var walletModel = _mapper.Map<Wallet>(editWalletDto);
-                walletModel.UserName = username;
+                walletModel.Username = username;
                 await _repo.Edit(username, walletModel);
                 _repo.SaveChanges();
 

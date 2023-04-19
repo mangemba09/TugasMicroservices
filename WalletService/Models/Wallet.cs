@@ -9,8 +9,8 @@ namespace WalletService.Models
     public class Wallet
     {
         [Key]
-        public string UserName { get; set; }
-        public string FullName { get; set; }
+        public string Username { get; set; }
+        public string Fullname { get; set; }
         public int Cash { get; set; }
     }
 }

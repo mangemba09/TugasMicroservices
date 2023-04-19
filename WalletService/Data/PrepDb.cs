@@ -21,20 +21,20 @@ namespace WalletServices.Data
                 context.Wallets.AddRange(
                     new Wallet()
                     {
-                        UserName = "user1",
-                        FullName = "Lucy Mangemba",
+                        Username = "user1",
+                        Fullname = "Lucy Mangemba",
                         Cash = 1000
                     },
                     new Wallet()
                     {
-                        UserName = "user2",
-                        FullName = "Try Lois",
+                        Username = "user2",
+                        Fullname = "Try Lois",
                         Cash = 2000
                     },
                     new Wallet()
                     {
-                        UserName = "user3",
-                        FullName = "Lidya Datu Langi",
+                        Username = "user3",
+                        Fullname = "Lidya Datu Langi",
                         Cash = 3000
                     });
                 context.SaveChanges();

@@ -26,7 +26,7 @@ namespace WalletServices.Data
             try
             {
                 var editWallet = await GetbyUsername(username);
-                editWallet.FullName = wallet.FullName;
+                editWallet.Fullname = wallet.Fullname;
                 wallet.Cash = editWallet.Cash;
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace WalletServices.Data
         public async Task<Wallet> GetbyUsername(string name)
         {
             var nameWallet = name.ToLower();
-            var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.UserName == nameWallet);
+            var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.Username == nameWallet);
             if (wallet == null)
             {
                 throw new Exception("Username Name is not found");
@@ -68,7 +68,7 @@ namespace WalletServices.Data
         {
             try
             {
-                var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.UserName == username);
+                var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.Username == username);
                 wallet.Cash += cash;
                 _context.Wallets.Update(wallet);
 
@@ -82,7 +82,7 @@ namespace WalletServices.Data
         {
             try
             {
-                var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.UserName == username);
+                var wallet = await _context.Wallets.FirstOrDefaultAsync(p => p.Username == username);
                 wallet.Cash -= cash;
                 _context.Wallets.Update(wallet);
 

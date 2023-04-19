@@ -4,7 +4,7 @@ using OrderServices.Data;
 
 namespace OrderServices.Controllers
 {
-    [Route("api/w/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class WalletController : ControllerBase
     {

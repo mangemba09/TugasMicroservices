@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {}
+    "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {}
   },
   "projects": {
-    "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {
+    "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
+        "projectUniqueName": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
         "projectName": "OrderService",
-        "projectPath": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
+        "projectPath": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\OrderService.csproj",
         "packagesPath": "C:\\Users\\Rapidtech\\.nuget\\packages\\",
-        "outputPath": "c:\\Bootcamp\\TugasMicroservices\\OrderService\\obj\\",
+        "outputPath": "C:\\Bootcamp\\TugasMicroservices\\OrderService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rapidtech\\AppData\\Roaming\\NuGet\\NuGet.Config",
